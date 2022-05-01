@@ -8,7 +8,7 @@ Rails.application.load_server
 
 use Rack::Cors do
   allow do
-    origins 'http://localhost:3001'
+    origins 'https://626ed32d276ce204132cfa5b--amazing-sunshine-8d59e1.netlify.app/'
             # regular expressions can be used here
 
             resource '/add_new_contact',
