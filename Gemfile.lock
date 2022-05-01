@@ -210,9 +210,15 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.5.4)
+    nokogiri (1.11.3-x86_64-linux)
+      racc (~> 1.4)
+    nokogiri (1.11.4-x86_64-darwin)
+      sracc (~> 1.4)
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
