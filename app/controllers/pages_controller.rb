@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
-  after_action :add_header, only: :search_contact
+  after_action :add_header, only: [:search_contact, :add_new_contact]
   def index
     p "HERE"
   end
