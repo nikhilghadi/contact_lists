@@ -8,17 +8,23 @@ Rails.application.load_server
 
 use Rack::Cors do
   allow do
-    origins 'https://amazing-sunshine-8d59e1.netlify.app/'
-            # regular expressions can be used here
 
-            resource '/add_new_contact',
-            :headers => :any,
-            :methods => [:post]        # headers to expose
+    origins '*'
+    resource '*', 
+        :headers => :any, 
+        :methods => [:get, :post, :delete, :put, :options]
+
+    # origins 'https://amazing-sunshine-8d59e1.netlify.app/'
+    #         # regular expressions can be used here
+
+    #         resource '/add_new_contact',
+    #         :headers => :any,
+    #         :methods => [:post]        # headers to expose
 
 
-            resource '/search_phone_number',
-            :headers => :any,
-            :methods => [:get]      
+    #         resource '/search_phone_number',
+    #         :headers => :any,
+    #         :methods => [:get]      
   end
 
 end
