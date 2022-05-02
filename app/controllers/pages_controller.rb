@@ -70,7 +70,7 @@ class PagesController < ApplicationController
 
   def add_header
     p "Adding header",response.headers
-    response.headers['Access-Control-Allow-Origin'] = 'https://amazing-sunshine-8d59e1.netlify.app/'
+    response.headers['Access-Control-Allow-Origin'] = 'https://amazing-sunshine-8d59e1.netlify.app'
     response.headers['Access-Control-Allow-Methods'] = 'GET'
     response.headers['Access-Control-Expose-Headers'] = ''
     response.headers['Access-Control-Max-Age'] = '7200'
