@@ -16,15 +16,60 @@ class PagesController < ApplicationController
   def search_contact
     p "search_contact",params[:text]
     text = params[:text].downcase
-
+    key_pad={2=>'abc',3=>'def',4=>'ghi',5=>'jkl',6=>'mno',7=>'pqrs',8=>'tuv',9=>'wxyz'}
+    str_text = []
+    p"text",text
+    text.each_char{|i|
+      i=i.to_i
+      p 'I',i.class
+      if (i!=0 and i!=1)
+        p "fdf"
+        str_text.push( key_pad[i])
+      end
+    }
+    new_str=[]
+    if str_text.length > 0
+      first_string = str_text[0]
+      p "str",str_text
+      if str_text.length > 1
+        first_string.each_char{|f|
+          new_str.push(f+str_text[1][0])
+        }
+        if str_text.length == 3
+          temp =new_str.map{|a| a}
+          new_str = []
+          temp.each do |d|
+            new_str.push(d+str_text[2][0])
+          end
+        end
+      else
+        new_str = [first_string[0]]
+      end
+    end
+    new_str =new_str.select{|s| (s!=nil and s!='')}
+    p "new_str",new_str
     list = []
     if(is_integer(text) == false)
     list = Contact.where("lower(contact_name)  like '%#{text}%' ")
     list = list.includes(:phone_numbers).map{|cl| {contact_name:cl.contact_name,numbers:cl.phone_numbers}}
     else
-      list = PhoneNumber.where("phone_number like '%#{text}%' ").map{|num| {contact_name:Contact.find(num.contact_id).contact_name,numbers:PhoneNumber.where(contact_id:num.contact_id)} }
+      contacts= []
+      if new_str.length
+        new_str.each do|ns|
+          l = Contact.where("lower(contact_name)  like '%#{ns.downcase}%' ")
+          l = l.includes(:phone_numbers).map{|cl| {contact_name:cl.contact_name,numbers:cl.phone_numbers}}
+          if( l.length and l[0]!=nil)
+            contacts.push(l[0])
+          end
+        end
+      end
+      p "contacts",contacts
+      nums = PhoneNumber.where("phone_number like '%#{text}%' ").map{|num| {contact_name:Contact.find(num.contact_id).contact_name,numbers:PhoneNumber.where(contact_id:num.contact_id)} }
+      list =contacts +nums
+
     end
     render json:list
+   
     
   end
 
