@@ -22,7 +22,7 @@ class PagesController < ApplicationController
     else
       list = PhoneNumber.where("phone_number like '%#{text}%' ").map{|num| {contact_name:Contact.find(num.contact_id).contact_name,numbers:PhoneNumber.where(contact_id:num.contact_id)} }
     end
-    render status:200 json: list.to_json
+    render json:list
     
   end
 
