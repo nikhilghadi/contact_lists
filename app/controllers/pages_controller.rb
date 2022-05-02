@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
   after_action :add_header, only: :search_contact
-  after_action :add_header, only: :add_new_contact
+  after_action :add_header2, only: :add_new_contact
 
   def index
     p "HERE"
@@ -72,6 +72,15 @@ class PagesController < ApplicationController
 
   def add_header
     p "Adding header",response.headers
+    response.headers['Access-Control-Allow-Origin'] = 'https://amazing-sunshine-8d59e1.netlify.app'
+    response.headers['Access-Control-Allow-Methods'] = 'GET'
+    response.headers['Access-Control-Expose-Headers'] = ''
+    response.headers['Access-Control-Max-Age'] = '7200'
+
+  end
+
+  def add_header2
+    p "Adding header2",response.headers
     response.headers['Access-Control-Allow-Origin'] = 'https://amazing-sunshine-8d59e1.netlify.app'
     response.headers['Access-Control-Allow-Methods'] = 'GET'
     response.headers['Access-Control-Expose-Headers'] = ''
