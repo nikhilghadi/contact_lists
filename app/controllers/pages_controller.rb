@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  after_action :add_header, only: :search_contact
   def index
     p "HERE"
   end
@@ -68,6 +68,13 @@ class PagesController < ApplicationController
     end
   end
 
+  def add_header
+    response.headers['Access-Control-Allow-Origin'] = 'https://amazing-sunshine-8d59e1.netlify.app/'
+    response.headers['Access-Control-Allow-Methods'] = 'GET'
+    response.headers['Access-Control-Expose-Headers'] = ''
+    response.headers['Access-Control-Max-Age'] = '7200'
+
+  end
   private
   def contacts_params(data)
       record = Hash.new
